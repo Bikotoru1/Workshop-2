@@ -1,13 +1,55 @@
+const formularioCalculadora = document.querySelector('#formulario-calculadora');
+const resultado = document.querySelector('#resultado');
 
+formularioCalculadora.addEventListener('submit', (e) => {
+    e.preventDefault();
+    calcularCalorias();
+});
 
 
 function calcularCalorias() {
+    aparecerResultado();
+    const peso = document.querySelector('#peso').value;
+    const altura = document.querySelector('#altura').value;
+    const edad = document.querySelector('#edad').value;
+    const sexo = document.querySelector('input[name="genero"]:checked').value;
 
     const multiplicadorTMB = {
         peso: 10,
         altura: 6.25,
         edad: 5
     }
+
+    const valorActividad = document.querySelector('select[name="actividad"]').value;
+
+    if (peso === '' || altura === '' || edad === '' || valorActividad === '') {
+        mostrarMensajeDeError('Todos los campos son obligatorios');
+        return;
+    }
+
+    if (isNaN(peso) || isNaN(altura) || isNaN(edad)) {
+        mostrarMensajeDeError('Todos los campos deben ser números');
+        return;
+    }
+
+    if (peso <= 0 || altura <= 0 || edad <= 0) {
+
+        mostrarMensajeDeError('Todos los campos deben ser mayores a 0');
+
+        return;
+
+    }
+
+    let calculoCalorias = 0;
+
+    if (sexo === 'hombre') {
+        calculoCalorias = valorActividad * ((multiplicadorTMB.peso * peso) + (multiplicadorTMB.altura * altura) - (multiplicadorTMB.edad * edad) + 5);
+
+    } else {
+        calculoCalorias = valorActividad * ((multiplicadorTMB.peso * peso) + (multiplicadorTMB.altura * altura) - (multiplicadorTMB.edad * edad) - 161);
+    }
+
+    
 
         //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
 
@@ -17,62 +59,60 @@ function calcularCalorias() {
     // totalCalorias.value = `${Math.floor(calculoCalorias)} kcal`;
     
     resultado.innerHTML = `
-        <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
-            <h5 class="card-title h2">Calorías requeridas</h5>
-            <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${} kcal" style="font-size: 2rem" disabled>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <strong>Resultado:</strong> ${Math.floor(calculoCalorias)} kcal
         </div>
-    `
+    `;
+
+    setTimeout(() => {
+        desvanecerResultado();
+    }
+
+    , 3000);
+
+    formularioCalculadora.reset();
      // Volver a limpiar variables
 
 }
 
 function mostrarMensajeDeError(msg) {
-    const calculo = document.querySelector('#calculo');
-    if (calculo) {
-        calculo.remove();
-    }
+    resultado.innerHTML = `
+        <div class="alert alert-danger" role="alert">
 
-    const divError = document.createElement('div');
-    divError.className = 'd-flex justify-content-center align-items-center h-100';
-    divError.innerHTML = `<span class="alert alert-danger text-center">${msg}</span>`;
 
-    resultado.appendChild(divError);
+            <strong>Error!</strong> ${msg}
+        </div>
 
+    `;
     setTimeout(() => {
-        divError.remove();
         desvanecerResultado();
-    }, 5000);
+    }, 3000);
 }
 
 
 // Animaciones
 function aparecerResultado() {
-    resultado.style.top = '100vh';
     resultado.style.display = 'block';
-    
     let distancia = 100;
-    let resta = 0.3;
+
     let id = setInterval(() => {
-        resta *= 1.1;
-        resultado.style.top = `${distancia - resta}vh`;
-        if (resta > 100) {
+        distancia -= 2;
+        resultado.style.top = `${distancia}vh`;
+        if (distancia <= 0) {
             clearInterval(id);
         }
-    }, 10)
+    }, 10);
 }
 
 function desvanecerResultado() {
-    let distancia = 1;
+    let distancia = 0;
 
     let id = setInterval(() => {
-        distancia *= 2;
+        distancia += 2;
         resultado.style.top = `${distancia}vh`;
-        if (distancia > 100) {
+        if (distancia >= 100) {
             clearInterval(id);
             resultado.style.display = 'none';
-            resultado.style.top = 0;
         }
-    }, 10)
+    }, 10);
 }
