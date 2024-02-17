@@ -16,12 +16,11 @@ body::-webkit-scrollbar-thumb {
 .header a {
     font-size: 1.5em;
 }
+
 .header a.active {
     text-decoration: underline;
     color: #ff0000 !important;
 }
-
-
 
 /* main */
 .row {
@@ -35,6 +34,7 @@ body::-webkit-scrollbar-thumb {
     background-position: center;
     background-size: cover;
 }
+
 .main-content .card {
     color:rgb(223, 223, 223);
     background-color: rgba(0, 0, 0, 0.5)
@@ -60,4 +60,9 @@ body::-webkit-scrollbar-thumb {
 .footer a {
     text-decoration: none;
     color: rgb(223, 223, 223);
+}
+
+.input-no-content::placeholder{
+    color       : red;
+    font-weight : bold;
 }
