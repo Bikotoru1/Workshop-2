@@ -59,7 +59,7 @@ function calcularCalorias() {
     // totalCalorias.value = `${Math.floor(calculoCalorias)} kcal`;
     
     resultado.innerHTML = `
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success text-center mt-3 p-3 rounded" role="alert">
             <strong>Resultado:</strong> ${Math.floor(calculoCalorias)} kcal
         </div>
     `;
@@ -68,16 +68,19 @@ function calcularCalorias() {
         desvanecerResultado();
     }
 
-    , 3000);
+    , 10000);   
+
+    if (calculoCalorias < 0) {
+        mostrarMensajeDeError('Error en el cálculo');
+        return;
+    }
 
     formularioCalculadora.reset();
-     // Volver a limpiar variables
-
 }
 
 function mostrarMensajeDeError(msg) {
     resultado.innerHTML = `
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger text-center mt-4 mb-4 p-2" role="alert">
 
 
             <strong>Error!</strong> ${msg}
