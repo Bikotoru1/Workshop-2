@@ -81,8 +81,6 @@ function calcularCalorias() {
 function mostrarMensajeDeError(msg) {
     resultado.innerHTML = `
         <div class="alert alert-danger text-center mt-4 mb-4 p-2" role="alert">
-
-
             <strong>Error!</strong> ${msg}
         </div>
 
