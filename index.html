@@ -29,34 +29,41 @@
     <header class="header">
         <div class="container-fluid">
             <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Calorie Calculator</a>
+                        <a class="navbar-brand" id="logo" href="#" style="display: inline-flex;margin: auto;">
+                            <img class="logo" style="display: inline-flex;margin: auto;" src="img/logo.png" alt="Calorie Calculator" width="50px">
+
+                            <span class="h1">Calorie Calculator</span>
+                        </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                      	<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-							<ul class="navbar-nav">
-								<li class="nav-item">
-									<a 
-										class         ="nav-link active" 
-										aria-current  ="page" 
-										href          ="#"
-									>
-										Home
-									</a>
-								</li>
-								<li class="nav-item">
-								<a class="nav-link" href="#">Nutrition</a>
-								</li>
-								<li class="nav-item">
-								<a class="nav-link" href="#">Plans</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">Contact</a>
-								</li>
-							</ul>
-                      	</div>
+                      
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                          <ul class="navbar-nav">
+                              <li class="nav-item">
+                                  <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Nutrición</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">Planes</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#">Contacto</a>
+                              </li>
+                          </ul>
+                        </div>
+
+                        <div class="d-flex justify-content-end" style="margin: auto;">
+                          <a href="#" class="btn btn-outline-light">Iniciar sesión</a>
+                          <a href="#" class="btn btn-danger">Registrarse</a>
+                        </div>
+                        
+                                               
+
                     </div>
                 </nav>
             </div>
@@ -64,98 +71,100 @@
     </header>
     
     <main class="main-content">
-      	<section class="container">
-			<div class="row py-4">
-				<div class="card col-lg-7">
-					<form id="calculator-form">
-						<fieldset>
-							<legend class="h2 text-center">Calorie Calculator</legend>
-							<div class="mb-3">
-								<label for="name" class="form-label h6">Name</label>
-								<input type="text" id="name" class="form-control" placeholder="Type your name">
-							</div>
+      <section class="container">
+        <div class="row py-4">
+          <div class="card col-lg-7">
+            <form id="calculator-form">
+              <fieldset>
+                <legend class="h2 justify-content-center align-items-center text-center mx-2 mt-2">Calorie Calculator</legend>
+                <div class="mb-3">
+                  <label for="name" class="form-label h6">Name</label>
+                  <input type="text" id="name" class="form-control" placeholder="Type your name">
+                </div>
 
-							<div class="mb-3">
-								<label for="id" class="form-label h6">ID</label>
+                <div class="mb-3">
+                  <label for="id" class="form-label h6">ID</label>
 
-								<select id="id" name="id" class="form-select">
-									<option value="-1">Pick your ID type</option>
-									<option value="0">Social Number</option>
-									<option value="1">Passport</option>
-								</select>
-							</div>
+                  <select id="id" name="id" class="form-select">
+                    <option value="-1">Pick your ID type</option>
+                    <option value="0">Social Number</option>
+                    <option value="1">Passport</option>
+                  </select>
+                </div>
 
-							<div class="mb-3">
-							<label for="id-number" class="form-label h6">ID Number</label>
-							<input type="number" id="id-number" class="form-control" placeholder="Type your id number">
-							</div>
+                <div class="mb-3">
+                <label for="id-number" class="form-label h6">ID Number</label>
+                <input type="number" id="id-number" class="form-control" placeholder="Type your id number">
+                </div>
 
-							<div class="mb-3">
-							<label for="age" class="form-label h6">Age</label>
-							<input type="number" id="age" class="form-control" min="15" max="80" placeholder="Type your age">
-							</div>
+                <div class="mb-3">
+                <label for="age" class="form-label h6">Age</label>
+                <input type="number" id="age" class="form-control" min="15" max="80" placeholder="Type your age">
+                </div>
 
-							<div class="mb-3">
-							<label for="weight" class="form-label h6">Weight</label>
-							<input type="number" id="weight" class="form-control" min="1" placeholder="Type your weight in kilograms">
-							</div>
+                <div class="mb-3">
+                <label for="weight" class="form-label h6">Weight</label>
+                <input type="number" id="weight" class="form-control" min="1" placeholder="Type your weight in kilograms">
+                </div>
 
-							<div class="mb-3">
-							<label for="height" class="form-label h6">Height</label>
-							<input type="number" id="height" class="form-control" min="1" placeholder="Type your height in centimeters">
-							</div>
+                <div class="mb-3">
+                <label for="height" class="form-label h6">Height</label>
+                <input type="number" id="height" class="form-control" min="1" placeholder="Type your height in centimeters">
+                </div>
 
-							<div class="mb-3">
-								<label for="activity" class="form-label h6">Fisical Activity</label>
+                <div class="mb-3">
+                  <label for="activity" class="form-label h6">Fisical Activity</label>
 
-								<select id="activity" name="activity" class="form-select">
-									<option value="-1">Pick your type of fisical activity</option>
-									<option value="1.2">A little bit or none</option>
-									<option value="1.375">Light exercise (1-3 days at week)</option>
-									<option value="1.55">Moderate exercise (3-5 days at week)</option>
-									<option value="1.725">Hard exercise (6-7 days at week)</option>
-									<option value="1.9">Extreme exercise (twice at day, very hard trainings)</option>
-								</select>
-							</div>
-							
-							<section class="row m-2 h-100">
-							<span class="h6 p-0">Sex</span>
-							<div class="form-check">
-								<input class="form-check-input" value="F" type="radio" name="gender" id="female" checked>
-								<label class="form-check-label" for="female">
-									Female
-								</label>
-							</div>
+                  <select id="activity" name="activity" class="form-select">
+                    <option value="-1" selected disabled hidden required
+                    >Pick your type of fisical activity</option>
+                    <option value="1.2" class="form-select"
+                    >A little bit or none</option>
+                    <option value="1.375" class="form-select">Light exercise (1-3 days at week)</option>
+                    <option value="1.55" class="form-select">Moderate exercise (3-5 days at week)</option>
+                    <option value="1.725" class="form-select">Hard exercise (6-7 days at week)</option>
+                    <option value="1.9" class="form-select">Extreme exercise (twice at day, very hard trainings)</option>
+                  </select>
+                </div>
+                
+                <section class="row m-2 h-100">
+                <span class="h6 p-0">Sex</span>
+                <div class="form-check">
+                  <input class="form-check-input" value="F" type="radio" name="gender" id="female" checked>
+                  <label class="form-check-label" for="female">
+                    Female
+                  </label>
+                </div>
 
-							<div class="form-check">
-								<input class="form-check-input" value="M" type="radio" name="gender" id="male">
-								<label class="form-check-label" for="male">
-									Male
-								</label>
-							</div>
-							</section>
-							<hr>
-							<div class="d-flex justify-content-center my-3">
-								<button 
-									type  ="submit" 
-									class ="btn btn-danger w-75" 
-									style ="font-size: 1.5rem"
-								>
-									Calculate
-								</button>
-							</div>
-						</fieldset>
-					</form>
-				</div>
+                <div class="form-check">
+                  <input class="form-check-input" value="M" type="radio" name="gender" id="male">
+                  <label class="form-check-label" for="male">
+                    Male
+                  </label>
+                </div>
+                </section>
+                <hr>
+                <div class="d-flex justify-content-center my-3">
+                  <button 
+                    type  ="submit" 
+                    class ="btn btn-danger w-75" 
+                    style ="font-size: 1.5rem"
+                  >
+                    Calculate
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
 
-				<article class="card col" id="result" style="top: 120vh;">
-				</article>
-			</div>
+          <article class="card col" id="result" style="top: 120vh;">
+          </article>
+        </div>
       	</section>
     </main>
 
-    <footer class="footer row p-3">
-      <div class="col d-flex justify-content-right align-items-center">
+    <footer class="footer row p-3 justify-content-center align-items-center">
+      <div class="col d-flex justify-content-center align-items-center mx-3">
         <ul>
           <li>
             <a href="#"><img class="icon" src="img/instagram-bk.svg" alt="Instagram" width="20px"></a>
@@ -172,7 +181,7 @@
         </ul>
       </div>
       
-      <div class="col d-flex justify-content-right align-items-center">
+      <div class="col d-flex justify-content-center align-items-center">
         <ul>
           <li><a href="#">Services</a></li>
           <li><a href="#">Guieds</a></li>
