@@ -1,4 +1,18 @@
 * {
+    /* CSS HEX */
+    --wine: #63343Dff;
+    --amaranth: #D63854ff;
+    --green-blue: #386BA2ff;
+    --jet: #2F2B23ff;
+    --dark-moss-green: #526231ff;
+
+    /* CSS HEX */
+    --green-blue: #386BA2ff;
+    --wine: #63343Dff;
+    --caput-mortuum: #62241Dff;
+    --persian-red: #D62C2Aff;
+    --pumpkin: #EA7D34ff;
+    
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -95,7 +109,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .main-content {
-    background-image: linear-gradient(#000000c7,#00000054), url('../img/cover-2.png');
+    background-image: linear-gradient(#000000c7,#00000054), url('../img/cover.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
