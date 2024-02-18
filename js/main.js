@@ -1,101 +1,155 @@
-const resultado     = document.getElementById( "resultado"      );
-const submitButton  = document.getElementById( "submit-button"  );
+const activity			= document.querySelector    ( 'select[name="activity"]'	);
+const calculatorForm	= document.getElementById	( 'calculator-form'			);
+const idType			= document.getElementById	( 'id'						);
+const result			= document.getElementById	( 'result'					);
 
-let activity;
-let age;
-let height;
-let weight;
+activity.addEventListener(
+	'click',
+	()=>{
+		activity.style.color = "black";
+	}
+)
 
-submitButton.addEventListener(
-    "click",
-    ()=>{
-        showResult();
+calculatorForm.addEventListener(
+    'submit',
+    ( event )=>{
+        event.preventDefault();
         
-        if( ! validate() ){
-            vanishResult();
-
-            return;
-        }
+        calcularCalorias();
     }
 );
 
-function validate(){
-    if( ! ( activity  = document.getElementById( "actividad"  ) ).value ){
-        activity.className = "form-control input-no-content";
-
-        showErrorMessage( "You have to place the intencity of your activity." );
-
-        return false;
-    }
-
-    if( ! ( age  = document.getElementById( "edad"  ) ).value ){
-        age.className = "form-control input-no-content";
-
-        showErrorMessage( "You have to place your age." );
-
-        return false;
-    }
-
-    if( ! ( height  = document.getElementById( "altura"  ) ).value ){
-        age.className = "form-control input-no-content";
-
-        showErrorMessage( "You have to place your height." );
-
-        return false;
-    }
-
-    if( ! ( weight  = document.getElementById( "peso"  ) ).value ){
-        age.className = "form-control input-no-content";
-
-        showErrorMessage( "You have to place your weight." );
-
-        return false;
-    }
-
-    return true;
-}
+idType.addEventListener(
+	'click',
+	()=>{
+		idType.style.color = "black";
+	}
+)
 
 function calcularCalorias(){
-    const multiplicadorTMB = {
-        peso    : 10,
-        altura  : 6.25,
-        edad    : 5
+    const bmtMultipliers ={
+        weight  : 10,
+        height  : 6.25,
+        age		: 5
     }
 
-    let calories;
-
-        //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
-
-        //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
-
+    showResult();
     
-    totalCalories.value = `${ Math.floor( calories ) } kcal`;
-    
-    resultado.innerHTML = `
-        <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
-            <h5 class="card-title h2">Calorías requeridas</h5>
-            <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${ totalCalories } kcal" style="font-size: 2rem" disabled>
-            </div>
-        </div>
-    `
-     // Volver a limpiar variables
+    const age			= document.getElementById   ( 'age'								);
+    const height		= document.getElementById   ( 'height'							);
+	const idNumber		= document.getElementById	( 'id-number'						);
+    const name			= document.getElementById   ( 'name'							);
+    const sex			= document.querySelector    ( 'input[name="gender"]:checked'	).value;
+    const weight		= document.getElementById   ( 'weight'							);
 
+    if( 
+		activity.value == '-1' 
+		||
+		age.value == '' 
+		|| 
+		height.value == '' 
+		|| 
+		idType.value == '-1'
+		|| 
+		idNumber.value == '' 
+		|| 
+		name.value == '' 
+		|| 
+		weight.value == '' 
+	){
+        if( activity.value == -1 ){
+            activity.style.color = "red";
+        }
+
+        if( age.value == '' ){
+            age.className = "form-control input-no-content";
+        }
+
+        if( height.value == '' ){
+            height.className = "form-control input-no-content";
+        }
+
+        if( idType.value == -1 ){
+            idType.style.color = "red";
+        }
+
+        if( idNumber.value == '' ){
+            idNumber.className = "form-control input-no-content";
+        }
+
+        if( weight.value == '' ){
+            weight.className = "form-control input-no-content";
+        }
+
+        if( name.value == '' ){
+            name.className = "form-control input-no-content";
+        }
+
+        showErrorMessage( 'All data is requiered.' );
+
+        return;
+    }
+
+    let calories = activity.value * ( ( bmtMultipliers.weight * weight.value ) + ( bmtMultipliers.height * height.value ) - ( bmtMultipliers.age * age.value ) + ( sex === 'male' ? 5 : -161 ) );
+
+    //Formula hombres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) + 5
+
+    //Formula mujeres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) - 161
+ 
+    if( calories < 0 ){
+        showErrorMessage( 'Calc error.' );
+
+        return;
+    }
+
+	result.innerHTML = `
+		<div class="card-body d-flex justify-content-center align-items-center h-100" id="calc">
+			<h2 class="card-title h2 text-center">Result</h2>
+			<div class="card my-3 w-100">
+				<p 
+					class	="text-center" 
+					style	="font-size 2rme"
+				>
+					The: ${ age.value < 30 ? "Young" : age.value < 60 ? "Adult" : "Elderly" } 
+					${ sex == "M" ? "Man" : "Woman" } 
+					${ name.value } 
+					identified with ${ idType.options[ idType.selectedIndex ].innerText } 
+					${ idType.selectedIndex > 1 ? "with the number " : "" }
+					${ idNumber.value }, requieres a total of ${ calories } 
+					kcal for the sustainment of ${ sex == "M" ? "his" : "her" } BMT.
+				</p>
+			</div>
+		</div>
+	`;
+
+    setTimeout(
+        ()=>{
+            vanishResult();
+        }, 
+        20000
+    );
+
+    calculatorForm.reset();
+}
+
+function changeBorder( element ){
+    element.style.borderColor = "red";
+    element.style.borderWidth = "3px";
 }
 
 function showErrorMessage( msg ){
-    const calculo = document.querySelector( '#calculo' );
+	const calc = document.querySelector( '#calc' );
 
-    if( calculo ){
-        calculo.remove();
-    }
+	if( calc ){
+		calc.remove();
+	}
 
-    const divError = document.createElement('div');
+    const divError = document.createElement( 'div' );
 
     divError.className = 'd-flex justify-content-center align-items-center h-100';
     divError.innerHTML = `<span class="alert alert-danger text-center">${ msg }</span>`;
 
-    resultado.appendChild( divError );
+    result.appendChild( divError );
 
     setTimeout(
         () => {
@@ -107,43 +161,40 @@ function showErrorMessage( msg ){
     );
 }
 
-
 // Animations
 function showResult(){
-    resultado.style.top     = '100vh';
-    resultado.style.display = 'block';
-    
-    let distancia   = 100;
-    let resta       = 0.3;
+    result.style.top     = '100vh';
+    result.style.display = 'block';
 
-    let id  = setInterval(
-        () => {
-            resta               *= 1.1;
-            resultado.style.top = `${ distancia - resta }vh`;
+    let distance = 120;
 
-            if( resta > 100 ){
+    let id = setInterval(
+        ()=>{
+            distance           -= 2;
+            result.style.top 	= `${ distance }vh`;
+
+            if( distance <= 0 ){
                 clearInterval( id );
             }
-        },
+        }, 
         10
-    )
+    );
 }
 
 function vanishResult(){
-    let distancia = 1;
+    let distance = 0;
 
     let id = setInterval(
-        () => {
-            distancia           *= 2;
-            resultado.style.top = `${ distancia }vh`;
+        ()=>{
+            distance           += 2;
+            result.style.top 	= `${ distance }vh`;
 
-            if( distancia > 100 ){
+            if( distance >= 120 ){
                 clearInterval( id );
 
-                resultado.style.display = 'none';
-                resultado.style.top     = 0;
+                result.style.display = 'none';
             }
-        },
+        }, 
         10
-    )
+    );
 }
