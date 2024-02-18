@@ -6,7 +6,7 @@ const result			= document.getElementById	( 'result'					);
 activity.addEventListener(
 	'click',
 	()=>{
-		activity.style.color = "black";
+		activity.style.color = getComputedStyle( activity ).getPropertyValue( '--text-color' );
 	}
 )
 
@@ -22,7 +22,7 @@ calculatorForm.addEventListener(
 idType.addEventListener(
 	'click',
 	()=>{
-		idType.style.color = "black";
+		idType.style.color = getComputedStyle( idType ).getPropertyValue( '--text-color' );
 	}
 )
 
@@ -174,9 +174,9 @@ function showResult(){
 
     let id = setInterval(
         ()=>{
-            distance           -= 2;
-            result.style.top 	= `${ distance }vh`;
-            result.style.opacity =   1 - (distance / 120) ;
+            distance                    -= 2;
+            result.style.top 	        = `${ distance }vh`;
+            result.style.opacity        = 1 - (distance / 120) ;
             result.style.backdropFilter = `blur( ${ 5 - ( distance / 12 ) }px )`;
 
             if( distance <= 0 ){
@@ -192,10 +192,11 @@ function vanishResult(){
 
     let id = setInterval(
         ()=>{
-            distance			+= 2;
-            result.style.top	= `${ distance }vh`;
-            result.style.opacity =  1 - ( distance / 120 );
+            distance			        += 2;
+            result.style.top	        = `${ distance }vh`;
+            result.style.opacity        = 1 - ( distance / 120 );
             result.style.backdropFilter = `blur( ${ 5 + ( distance / 12 ) }px )`;
+
             if( distance >= 120 ){
                 clearInterval( id );
 
@@ -206,42 +207,18 @@ function vanishResult(){
     );
 }
 
-// function toggleTheme() {
-//     var theme = document.getElementById('theme');
-//     if (theme.getAttribute('href') == 'css/light.css') {
-//         theme.href = 'css/dark.css';
-//     } else {
-//         theme.href = 'css/light.css';
-//     }
+function toggleTheme(){
+    document.documentElement.classList.toggle( 'dark-theme' );
 
-//     var themeIcon = document.getElementById('theme-icon');
-//     if (themeIcon.getAttribute('src') == 'img/light.png') {
-//         themeIcon.src = 'img/dark.png';
-//     } else {
-//         themeIcon.src = 'img/light.png';
-//     }
+    var themeIcon = document.getElementById( 'theme-icon' );
 
-//     var themeText = document.getElementById('theme-text');
-//     if (themeText.innerHTML == 'Modo Oscuro') {
-//         themeText.innerHTML = 'Modo Claro';
-//     } else {
-//         themeText.innerHTML = 'Modo Oscuro';
-//     }
-// }
+    themeIcon.src = themeIcon.getAttribute( 'src' ) == 'img/light.png'
+        ? 'img/dark.png'
+        : 'img/light.png';
 
-function toggleTheme() {
-    document.documentElement.classList.toggle('dark-theme');
-    var themeIcon = document.getElementById('theme-icon');
-    if (themeIcon.getAttribute('src') == 'img/light.png') {
-        themeIcon.src = 'img/dark.png';
-    } else {
-        themeIcon.src = 'img/light.png';
-    }
+    var themeText = document.getElementById( 'theme-text' );
 
-    var themeText = document.getElementById('theme-text');
-    if (themeText.innerHTML == 'Modo Oscuro') {
-        themeText.innerHTML = 'Modo Claro';
-    } else {
-        themeText.innerHTML = 'Modo Oscuro';
-    }
+    themeText.innerHTML = themeText.innerHTML == 'Modo Oscuro'
+        ? 'Modo Claro'
+        : 'Modo Oscuro';
 }
