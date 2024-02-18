@@ -104,10 +104,10 @@ function calcularCalorias(){
 
 	result.innerHTML = `
 		<div class="card-body d-flex flex-column justify-content-center align-items-center h-100" id="calc">
-			<h2 class="card-title h2 text-center">Result</h2>
-			<div class="card my-3 w-100">
+			<div class="card my-3" style="width: 30rem;">
+			    <h2 class="card-title h2 text-center mb-4" style="font-size: 3rem;">Result</h2>
 				<p 
-					class	="text-center" 
+					class	="text-center card-text p-3"
 					style	="font-size 2rme"
 				>
 					The: ${ age.value < 30 ? "Young" : age.value < 60 ? "Adult" : "Elderly" } 
@@ -151,7 +151,7 @@ function showErrorMessage( msg ){
     const divError = document.createElement( 'div' );
 
     divError.className = 'd-flex justify-content-center align-items-center h-100';
-    divError.innerHTML = `<span class="alert alert-danger text-center">${ msg }</span>`;
+    divError.innerHTML = `<span class="alert alert-danger text-center" role="alert" style="font-size: 2rem; width: 30rem;">${ msg }</span>`;
 
     result.appendChild( divError );
 
@@ -167,7 +167,7 @@ function showErrorMessage( msg ){
 
 // Animations
 function showResult(){
-    result.style.top     = '100vh';
+    result.style.top     =  '120vh';
     result.style.display = 'block';
 
     let distance = 120;
@@ -176,6 +176,8 @@ function showResult(){
         ()=>{
             distance           -= 2;
             result.style.top 	= `${ distance }vh`;
+            result.style.opacity =   1 - (distance / 120) ;
+            result.style.backdropFilter = `blur( ${ 5 - ( distance / 12 ) }px )`;
 
             if( distance <= 0 ){
                 clearInterval( id );
@@ -192,7 +194,8 @@ function vanishResult(){
         ()=>{
             distance			+= 2;
             result.style.top	= `${ distance }vh`;
-
+            result.style.opacity =  1 - ( distance / 120 );
+            result.style.backdropFilter = `blur( ${ 5 + ( distance / 12 ) }px )`;
             if( distance >= 120 ){
                 clearInterval( id );
 
@@ -201,4 +204,44 @@ function vanishResult(){
         }, 
         10
     );
+}
+
+// function toggleTheme() {
+//     var theme = document.getElementById('theme');
+//     if (theme.getAttribute('href') == 'css/light.css') {
+//         theme.href = 'css/dark.css';
+//     } else {
+//         theme.href = 'css/light.css';
+//     }
+
+//     var themeIcon = document.getElementById('theme-icon');
+//     if (themeIcon.getAttribute('src') == 'img/light.png') {
+//         themeIcon.src = 'img/dark.png';
+//     } else {
+//         themeIcon.src = 'img/light.png';
+//     }
+
+//     var themeText = document.getElementById('theme-text');
+//     if (themeText.innerHTML == 'Modo Oscuro') {
+//         themeText.innerHTML = 'Modo Claro';
+//     } else {
+//         themeText.innerHTML = 'Modo Oscuro';
+//     }
+// }
+
+function toggleTheme() {
+    document.documentElement.classList.toggle('dark-theme');
+    var themeIcon = document.getElementById('theme-icon');
+    if (themeIcon.getAttribute('src') == 'img/light.png') {
+        themeIcon.src = 'img/dark.png';
+    } else {
+        themeIcon.src = 'img/light.png';
+    }
+
+    var themeText = document.getElementById('theme-text');
+    if (themeText.innerHTML == 'Modo Oscuro') {
+        themeText.innerHTML = 'Modo Claro';
+    } else {
+        themeText.innerHTML = 'Modo Oscuro';
+    }
 }
