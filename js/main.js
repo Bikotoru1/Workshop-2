@@ -103,7 +103,7 @@ function calcularCalorias(){
     }
 
 	result.innerHTML = `
-		<div class="card-body d-flex justify-content-center align-items-center h-100" id="calc">
+		<div class="card-body d-flex flex-column justify-content-center align-items-center h-100" id="calc">
 			<h2 class="card-title h2 text-center">Result</h2>
 			<div class="card my-3 w-100">
 				<p 
@@ -129,12 +129,16 @@ function calcularCalorias(){
         20000
     );
 
-    calculatorForm.reset();
-}
+	activity.style.color 	= "black";
+	idType.style.color 		= "black";
 
-function changeBorder( element ){
-    element.style.borderColor = "red";
-    element.style.borderWidth = "3px";
+	age.className 		= "form-control";
+	height.className 	= "form-control";
+	idNumber.className	= "form-control";
+	weight.className	= "form-control";
+	name.className 		= "form-control";
+
+    calculatorForm.reset();
 }
 
 function showErrorMessage( msg ){
@@ -186,8 +190,8 @@ function vanishResult(){
 
     let id = setInterval(
         ()=>{
-            distance           += 2;
-            result.style.top 	= `${ distance }vh`;
+            distance			+= 2;
+            result.style.top	= `${ distance }vh`;
 
             if( distance >= 120 ){
                 clearInterval( id );
