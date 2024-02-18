@@ -10,7 +10,7 @@
     --secondary-color   : #63343Dff;
     --accent-color      : #D63854ff;
     --background-color  : #2F2B23ff;
-    --text-color        : rgb(116, 169, 227);
+    --text-color        : rgb(151, 201, 254);
     --error-text-color  : #FF0000FF;
 }
 
@@ -337,11 +337,12 @@ input[type="submit"]:focus {
 
 input[type="text"],
 input[type="number"] {
+    color			: var(--text-color) !important;
     background-color: #ffffff2e;
 }
 
 /* Placeholder color */
-input::placeholder {
+input[type="text"]::placeholder, input[type="number"]::placeholder{
     color: var(--text-color);
 }
 
