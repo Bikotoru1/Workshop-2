@@ -108,14 +108,14 @@ function calcularCalorias(){
 			    <h2 class="card-title h2 text-center mb-4" style="font-size: 3rem;">Result</h2>
 				<p 
 					class	="text-center card-text p-3"
-					style	="font-size 2rme"
+					style	="font-size: 1.5rem;"
 				>
 					The: ${ age.value < 30 ? "Young" : age.value < 60 ? "Adult" : "Elderly" } 
 					${ sex == "M" ? "Man" : "Woman" } 
 					${ name.value } 
 					identified with ${ idType.options[ idType.selectedIndex ].innerText } 
 					${ idType.selectedIndex > 1 ? "with the number " : "" }
-					${ idNumber.value }, requieres a total of ${ calories } 
+					${ idNumber.value }, requieres a total of ${ Math.floor(calories) } 
 					kcal for the sustainment of ${ sex == "M" ? "his" : "her" } BMT.
 				</p>
 			</div>
