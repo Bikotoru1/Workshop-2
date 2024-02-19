@@ -218,8 +218,8 @@ body::-webkit-scrollbar-thumb {
     color					: var(--text-color);
     background-color		:  var(--background-color);
     box-shadow				: 0 0 10px var(--background-color);
-    -webkit-backdrop-filter	: blur(5px);
-    backdrop-filter			: blur(5px);
+    -webkit-backdrop-filter	: blur(20px);
+    backdrop-filter			: blur(20px);
     transition				: 0.3s;
 }
 
@@ -274,9 +274,8 @@ body::-webkit-scrollbar-thumb {
     position                : fixed;
     justify-content         : center;
     align-items             : center;
-    /* Blur  background */
-    -webkit-backdrop-filter : blur(0px);
-    backdrop-filter         : blur(0px);
+    background-color        : rgba(0, 0, 0, 0.178);
+    z-index                 : 100;
 }
 
 #result .card {
@@ -315,8 +314,9 @@ body::-webkit-scrollbar-thumb {
 
 /* Common styles for all input types */
 input, input[type="text"], input[type="number"] {
+    color-scheme    : light dark;
     padding         : 10px;
-    margin          : 10px 0;
+    margin          : 0px 0;
     width           : 100%;
     border          : none;
     border-radius   : 5px;
@@ -352,6 +352,66 @@ input[type="number"]:focus {
     background-color: #ffffff2e;
 }
 
+input[type="radio"] {
+    border         : 2px solid var(--secondary-color);
+    border-radius  : 50%;
+    width          : 1rem;
+    height         : 1rem;
+    background-color: transparent;
+    cursor         : pointer;
+}
+
+input[type="radio"]:checked {
+    border: 2px solid var(--accent-color);
+    background-color: var(--accent-color);
+}
+
+input[type="radio"]:hover {
+    border: 2px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+}
+
+input[type="radio"]:active {
+    border: 2px solid var(--accent-color);
+    background-color: var(--accent-color);
+}
+
+input[type="radio"]:focus {
+    border: 2px solid var(--accent-color);
+    background-color: var(--accent-color);
+}
+
+input[type="radio"]::before {
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+input[type="radio"]:checked::before {
+    opacity: 1;
+}
+
+input[type="radio"]:hover::before {
+    opacity: 1;
+}
+
+input[type="radio"]:active::before {
+    opacity: 1;
+}
+
+input[type="radio"]:focus::before {
+    opacity: 1;
+}
+
 /* Select styles */
 select {
     appearance          : none;
@@ -380,7 +440,7 @@ select option {
 /* options */
 .form-select {
     padding         : 10px;
-    margin          : 10px 0;
+    margin          : 0px 0;
     width           : 100%;
     border          : none;
     border-radius   : 5px;
@@ -434,8 +494,13 @@ select option {
     border-radius   : 5px;
     color           : rgba(255, 255, 255, 0.541);
     font-size       : 1.2rem;
+    transition: 0.3s;
 }
 
+.form-label:hover {
+    color           : var(--text-color);
+    transition: 0.3s;
+}
 form legend {
     padding         : auto;
     margin          : auto;
