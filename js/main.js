@@ -222,3 +222,36 @@ function toggleTheme(){
         ? 'Modo Claro'
         : 'Modo Oscuro';
 }
+//cambio de idioma Al cargar la página
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Recuperar el estado del switch desde local storage
+    var langSwitch = document.getElementById("languageSwitch");
+    var lang = localStorage.getItem("language");
+    if (lang === "es") {
+      langSwitch.checked = true;
+    } else {
+      langSwitch.checked = false;
+    }
+  });
+  
+  function changeLanguage() {
+    var langSwitch = document.getElementById("languageSwitch");
+  
+    // Guardar el estado del switch en local storage
+    if (langSwitch.checked) {
+      localStorage.setItem("language", "es");
+    } else {
+      localStorage.setItem("language", "en");
+    }
+  
+    // Redireccionar a la página correspondiente
+    if (langSwitch.checked) {
+      window.location.href = "index_es.html";
+    } else {
+      window.location.href = "index_en.html";
+    }
+  }
+  
+
+  

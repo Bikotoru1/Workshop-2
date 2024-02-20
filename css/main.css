@@ -555,3 +555,10 @@ form legend {
 .input-no-content::placeholder{
 	color: var( --error-text-color );
 }
+
+.language-switch {
+    position: fixed;
+    top: 115px;
+    right: -8px;
+    z-index: 1000;
+}
