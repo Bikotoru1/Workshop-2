@@ -436,7 +436,6 @@ select option {
     color: #000;
 }
 
-
 /* options */
 .form-select {
     padding         : 10px;
@@ -501,6 +500,7 @@ select option {
     color           : var(--text-color);
     transition: 0.3s;
 }
+
 form legend {
     padding         : auto;
     margin          : auto;
@@ -552,13 +552,21 @@ form legend {
     color           : var(--text-color);
 }
 
+.form-control{
+	color: var( --text-color );
+}
+
 .input-no-content::placeholder{
-	color: var( --error-text-color );
+	color: var( --error-text-color ) !important;
+}
+
+.value-span{
+	font-weight: bold;
 }
 
 .language-switch {
     position: fixed;
-    top: 115px;
-    right: -8px;
-    z-index: 1000;
+    top		: 115px;
+    right	: -8px;
+    z-index	: 1000;
 }

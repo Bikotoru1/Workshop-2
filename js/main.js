@@ -25,6 +25,28 @@ idType.addEventListener(
 		idType.style.color = getComputedStyle( idType ).getPropertyValue( '--text-color' );
 	}
 )
+//cambio de idioma Al cargar la página
+
+document.addEventListener(
+	"DOMContentLoaded",
+	 function() {
+		// Recuperar el estado del switch desde local storage
+		var langSwitch 	= document		.getElementById	( "languageSwitch"	);
+		var lang 		= localStorage	.getItem		( "language"		);
+
+		langSwitch.checked = lang === "es";
+	}
+);
+  
+function changeLanguage(){
+    var langSwitch = document.getElementById( "languageSwitch" );
+  
+    // Guardar el estado del switch en local storage
+    localStorage.setItem("language", langSwitch.checked ? "es" : "en" );
+  
+    // Redireccionar a la página correspondiente
+	window.location.href = langSwitch.checked ? "index_es.html" : "index_en.html";
+}
 
 function calcularCalorias(){
     const bmtMultipliers ={
@@ -41,6 +63,111 @@ function calcularCalorias(){
     const name			= document.getElementById   ( 'name'							);
     const sex			= document.querySelector    ( 'input[name="gender"]:checked'	).value;
     const weight		= document.getElementById   ( 'weight'							);
+
+	if( ! validateData() ){
+		return;
+	}
+
+    let calories = activity.value * ( ( bmtMultipliers.weight * weight.value ) + ( bmtMultipliers.height * height.value ) - ( bmtMultipliers.age * age.value ) + ( sex === 'male' ? 5 : -161 ) );
+
+    //Formula hombres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) + 5
+
+    //Formula mujeres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) - 161
+ 
+    if( calories < 0 ){
+        showErrorMessage( 'Calc error.' );
+
+        return;
+    }
+
+	result.innerHTML = `
+		<div class="card-body d-flex flex-column justify-content-center align-items-center h-100" id="calc">
+			<div class="card my-3" style="width: 30rem;">
+			    <h2 class="card-title h2 text-center mb-4" style="font-size: 3rem;">Result</h2>
+				<p 
+					class	="text-center card-text p-3"
+					style	="font-size 3rme"
+				>
+					${
+						localStorage.getItem( "language" ) == "en"
+							? `
+								The 
+								<span class="value-span">
+									${ age.value < 30 ? "Young" : age.value < 60 ? "Adult" : "Elderly" } 
+									${ sex == "M" ? "Man" : "Woman" } ${ name.value }
+								</span> 
+								identified with 
+								<span class="value-span">
+									${ idType.options[ idType.selectedIndex ].innerText } ${ idType.selectedIndex > 1 ? "with the number " : "" } 
+									${ idNumber.value }
+								</span>
+								, requieres a total of 
+								<span class="value-span">
+									${ calories } kcal
+								</span> 
+								for the sustainment of ${ sex == "M" ? "his" : "her" } BMT.
+							`
+							:`
+								${ sex == "M" ? "El" : "La" }
+								<span class="value-span">
+									${ 
+										age.value < 30
+											? "Joven" 
+											: age.value < 60 
+												? sex == "M"
+													? "Hombre Adulto"
+													: "Mujer Adulta" 
+												: sex == "M"
+													? "Hombre Anciano"
+													: "Mujer Anciana" 
+									} 
+									${ name.value }
+								</span> 
+								identificado con 
+								<span class="value-span">
+									${ idType.options[ idType.selectedIndex ].innerText }
+								</span> 
+								número
+								<span class="value-span">
+									${ idNumber.value }
+								</span>
+								, requiere un total de 
+								<span class="value-span">
+									${ calories } kcal
+								</span> 
+								para el sostenimiento de su TBM.
+							`
+					}
+				</p>
+			</div>
+		</div>
+	`;
+
+    setTimeout(
+        ()=>{
+            vanishResult();
+        }, 
+        15000
+    );
+
+	activity.style.color = 
+	idType	.style.color = getComputedStyle( idType ).getPropertyValue( '--text-color' );
+
+	age		.className =
+	height	.className =
+	idNumber.className =
+	weight	.className =
+	name	.className = "form-control";
+
+    calculatorForm.reset();
+}
+
+function validateData(){
+    const age			= document.getElementById( 'age'		);
+    const height		= document.getElementById( 'height'		);
+	const idNumber		= document.getElementById( 'id-number'	);
+    const name			= document.getElementById( 'name'		);
+    const weight		= document.getElementById( 'weight'		);
 
     if( 
 		activity.value == '-1' 
@@ -87,58 +214,10 @@ function calcularCalorias(){
 
         showErrorMessage( 'All data is requiered.' );
 
-        return;
+        return false;
     }
 
-    let calories = activity.value * ( ( bmtMultipliers.weight * weight.value ) + ( bmtMultipliers.height * height.value ) - ( bmtMultipliers.age * age.value ) + ( sex === 'male' ? 5 : -161 ) );
-
-    //Formula hombres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) + 5
-
-    //Formula mujeres: valor actividad x (10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) - 161
- 
-    if( calories < 0 ){
-        showErrorMessage( 'Calc error.' );
-
-        return;
-    }
-
-	result.innerHTML = `
-		<div class="card-body d-flex flex-column justify-content-center align-items-center h-100" id="calc">
-			<div class="card my-3" style="width: 30rem;">
-			    <h2 class="card-title h2 text-center mb-4" style="font-size: 3rem;">Result</h2>
-				<p 
-					class	="text-center card-text p-3"
-					style	="font-size: 1.5rem;"
-				>
-					The: ${ age.value < 30 ? "Young" : age.value < 60 ? "Adult" : "Elderly" } 
-					${ sex == "M" ? "Man" : "Woman" } 
-					${ name.value } 
-					identified with ${ idType.options[ idType.selectedIndex ].innerText } 
-					${ idType.selectedIndex > 1 ? "with the number " : "" }
-					${ idNumber.value }, requieres a total of ${ Math.floor(calories) } 
-					kcal for the sustainment of ${ sex == "M" ? "his" : "her" } BMT.
-				</p>
-			</div>
-		</div>
-	`;
-
-    setTimeout(
-        ()=>{
-            vanishResult();
-        }, 
-        20000
-    );
-
-	activity.style.color 	= "black";
-	idType.style.color 		= "black";
-
-	age.className 		= "form-control";
-	height.className 	= "form-control";
-	idNumber.className	= "form-control";
-	weight.className	= "form-control";
-	name.className 		= "form-control";
-
-    calculatorForm.reset();
+	return true;
 }
 
 function showErrorMessage( msg ){
@@ -222,36 +301,3 @@ function toggleTheme(){
         ? 'Modo Claro'
         : 'Modo Oscuro';
 }
-//cambio de idioma Al cargar la página
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Recuperar el estado del switch desde local storage
-    var langSwitch = document.getElementById("languageSwitch");
-    var lang = localStorage.getItem("language");
-    if (lang === "es") {
-      langSwitch.checked = true;
-    } else {
-      langSwitch.checked = false;
-    }
-  });
-  
-  function changeLanguage() {
-    var langSwitch = document.getElementById("languageSwitch");
-  
-    // Guardar el estado del switch en local storage
-    if (langSwitch.checked) {
-      localStorage.setItem("language", "es");
-    } else {
-      localStorage.setItem("language", "en");
-    }
-  
-    // Redireccionar a la página correspondiente
-    if (langSwitch.checked) {
-      window.location.href = "index_es.html";
-    } else {
-      window.location.href = "index_en.html";
-    }
-  }
-  
-
-  

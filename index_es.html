@@ -80,19 +80,44 @@
 					<input type="text" id="name" class="form-control" placeholder="Escribe tu nombre">
                 </div>
 
-                <div class="mb-3">
-					<label for="id" class="form-label h6">Identificación</label>
+                <div class="mb-3 me-3">
+					<div class="d-flex justify-content-start align-items-center">
+						<div class="col-6 me-3">
+							<label 
+								for		="id-number" 
+								class	="form-label h6"
+							>
+								Tipo De Documento
+							</label>
 
-					<select id="id" name="id" class="form-select">
-						<option value="-1">Elige tu tipo de identificación</option>
-						<option value="0">Cédula de Ciudadanía</option>
-						<option value="1">Pasaporte</option>
-					</select>
-                </div>
+							<select 
+								id		="id" 
+								name	="id" 
+								class	="form-select"
+							>
+								<option value="-1">Escoje El Tipo</option>
+								<option value="0">Cédula De Cuidadanía</option>
+								<option value="1">Tarjeta De Identidad</option>
+								<option value="2">Pasaporte</option>
+							</select>
+						</div>
 
-                <div class="mb-3">
-					<label for="id-number" class="form-label h6">Número de identificación</label>
-					<input type="number" id="id-number" class="form-control" placeholder="Escribe tu número de identificación">
+						<div class="col-6">
+							<label 
+								for		="id-number" 
+								class	="form-label h6"
+							>
+								Número De Documento
+							</label>
+
+							<input 
+								type		="number" 
+								id			="id-number" 
+								class		="form-control" 
+								placeholder	="Escribe el número"
+							>
+						</div>
+					</div>
                 </div>
 
                 <div class="mb-3">
@@ -125,17 +150,37 @@
                 
                 <section class="col m-2 h-100">
                     <label class="form-label h6 justify-content-center align-items-center">Genero</label>
-                    <div class="row justify-content-center align-items-center d-flex">
+                    <div class="d-flex">
                         <div class="form-check justify-content-center align-items-center">
-                            <input class="form-check-input" value="F" type="radio" name="gender" id="female" checked>
-                            <label class="form-check-label justify-content-center align-items-center mx-2 mt-1" for="female">
+                            <input 
+								class	="form-check-input" 
+								value	="F" 
+								type	="radio" 
+								name	="gender" 
+								id		="female" 
+								checked
+							>
+
+                            <label 
+								class	="form-check-label justify-content-center align-items-center mx-2 mt-1" 
+								for		="female"
+							>
                                 Femenino
                             </label>
                         </div>
 
                         <div class="form-check justify-content-center align-items-center">
-                            <input class="form-check-input" value="M" type="radio" name="gender" id="male">
-                            <label class="form-check-label justify-content-center align-items-center mx-2 mt-1" for="male">
+                            <input 
+								class	="form-check-input" 
+								value	="M" 
+								type	="radio" 
+								name	="gender" 
+								id		="male"
+							>
+                            <label 
+								class	="form-check-label justify-content-center align-items-center mx-2 mt-1" 
+								for		="male"
+							>
                                 Masculino
                             </label>
                         </div>
