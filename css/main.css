@@ -488,7 +488,7 @@ select option {
 .form-label {
     padding         : 5px;
     margin          : auto;
-    width           : 60%;
+    width           : 100%;
     border          : none;
     border-radius   : 5px;
     color           : rgba(255, 255, 255, 0.541);
