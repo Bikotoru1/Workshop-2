@@ -289,16 +289,19 @@ body::-webkit-scrollbar-thumb {
     background-color        : var(--background-color);
     backdrop-filter         : blur(5px);
     -webkit-backdrop-filter : blur(5px);
+    transition              : 0.3s;
 }
 
 .show {
     display                 : flex !important;
     animation               : showResultAnimation 0.5s;
+    transition: 0.3s;
 }
 
 .vanish {
     display                 : none;
     animation               : vanishResultAnimation 0.5s;
+    transition: 0.3s;
 }
 
 /* footer */
@@ -326,6 +329,13 @@ body::-webkit-scrollbar-thumb {
 
 .icon {
     filter: invert(1);
+    transition: 0.3s;
+}
+
+.icon:hover, .icon:active, .icon:focus {
+    filter: invert(0.9) saturate(3) hue-rotate(100deg) brightness(0.5) contrast(1.5) !important;
+    transition: 0.3s;
+
 }
 
 /* Common styles for all input types */
@@ -338,34 +348,40 @@ input, input[type="text"], input[type="number"] {
     border-radius   : 5px;
     background-color: transparent;
     color           : var(--text-color);
+    transition      : 0.3s;
 }
 
 input[type="submit"] {
     background-color: var(--accent-color);
     cursor          : pointer;
+    transition      : 0.3s;
 }
 
 input[type="submit"]:hover,
 input[type="submit"]:active,
 input[type="submit"]:focus {
     background-color: var(--accent-color);
+    transition      : 0.3s;
 }
 
 input[type="text"],
 input[type="number"] {
     color			: var(--text-color) !important;
     background-color: #ffffff2e;
+    transition      : 0.3s;
 }
 
 /* Placeholder color */
 input[type="text"]::placeholder, input[type="number"]::placeholder{
     color: var(--text-color);
+    transition      : 0.3s;
 }
 
 /* Focus styles */
 input[type="text"]:focus,
 input[type="number"]:focus {
     background-color: #ffffff2e;
+    transition      : 0.3s;
 }
 
 input[type="radio"] {
@@ -375,26 +391,31 @@ input[type="radio"] {
     height         : 1rem;
     background-color: transparent;
     cursor         : pointer;
+    transition      : 0.3s;
 }
 
 input[type="radio"]:checked {
     border: 2px solid var(--accent-color);
     background-color: var(--accent-color);
+    transition      : 0.3s;
 }
 
 input[type="radio"]:hover {
     border: 2px solid var(--secondary-color);
     background-color: var(--secondary-color);
+    transition      : 0.3s;
 }
 
 input[type="radio"]:active {
     border: 2px solid var(--accent-color);
     background-color: var(--accent-color);
+    transition      : 0.3s;
 }
 
 input[type="radio"]:focus {
     border: 2px solid var(--accent-color);
     background-color: var(--accent-color);
+    transition      : 0.3s;
 }
 
 input[type="radio"]::before {
@@ -464,12 +485,13 @@ select option {
     color           : var(--text-color);
 }
 
-.form-select:focus form-select:hover form-select:active {
+.form-select:focus, form-select:hover, form-select:active {
     background-color: #ffffff2e;
     color           : var(--text-color);
+    
 }
 
-.form-select::placeholder form-select:-ms-input-placeholder form-select::-ms-input-placeholder form-select::-webkit-input-placeholder form-select::-moz-placeholder form-select::-moz-placeholder form-select::-o-placeholder {
+.form-select::placeholder, form-select:-ms-input-placeholder, form-select::-ms-input-placeholder, form-select::-webkit-input-placeholder, form-select::-moz-placeholder, form-select::-moz-placeholder, form-select::-o-placeholder {
     background-color: #ffffff2e;
     color           : var(--text-color);
 }
@@ -511,6 +533,16 @@ select option {
   border-top    : var(--size) solid var(--accent-color);
 }   
 
+.title {
+    padding         : 5px;
+    margin          : auto;
+    width           : 100%;
+    border          : none;
+    border-radius   : 5px;
+    color           : rgba(255, 255, 255, 0.541);
+    transition: 0.3s;
+}
+
 .form-label {
     padding         : 5px;
     margin          : auto;
@@ -522,7 +554,7 @@ select option {
     transition: 0.3s;
 }
 
-.form-label:hover {
+.form-label:hover, .title:hover {
     color           : var(--text-color);
     transition: 0.3s;
 }
