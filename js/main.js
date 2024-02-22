@@ -229,7 +229,9 @@ function showErrorMessage( msg ){
 
     const divError = document.createElement( 'div' );
 
-    divError.className = 'd-flex justify-content-center align-items-center h-100';
+    divError.id = 'calc';
+
+    divError.className = 'd-flex justify-content-center align-items-center';
     divError.innerHTML = `<span class="alert alert-danger text-center" role="alert" style="font-size: 2rem; width: 30rem;">${ msg }</span>`;
 
     result.appendChild( divError );
@@ -245,45 +247,32 @@ function showErrorMessage( msg ){
 }
 
 // Animations
-function showResult(){
-    result.style.top     =  '120vh';
-    result.style.display = 'block';
-
-    let distance = 120;
-
-    let id = setInterval(
-        ()=>{
-            distance                    -= 2;
-            result.style.top 	        = `${ distance }vh`;
-            result.style.opacity        = 1 - (distance / 120) ;
-            result.style.backdropFilter = `blur( ${ 5 - ( distance / 12 ) }px )`;
-
-            if( distance <= 0 ){
-                clearInterval( id );
-            }
-        }, 
-        10
-    );
+function showResult() {
+    result.classList.add('show');
+    document.body.addEventListener('click', handleClickOutside);
 }
 
-function vanishResult(){
-    let distance = 0;
+function vanishResult() {
+    result.classList.remove('show');
+    document.body.removeEventListener('click', handleClickOutside);
+}
 
-    let id = setInterval(
-        ()=>{
-            distance			        += 2;
-            result.style.top	        = `${ distance }vh`;
-            result.style.opacity        = 1 - ( distance / 120 );
-            result.style.backdropFilter = `blur( ${ 5 + ( distance / 12 ) }px )`;
+function handleClickOutside(event) {
+    let card = document.getElementById('calc');
+    if (card && !card.contains(event.target)) {
+        vanishResult();
+    }
 
-            if( distance >= 120 ){
-                clearInterval( id );
 
-                result.style.display = 'none';
-            }
-        }, 
-        10
-    );
+    if( event.target.id == 'result' ){
+        vanishResult();
+    }
+
+    if( event.target.id == 'calc' ){
+        return;
+    }
+
+
 }
 
 function toggleTheme(){
