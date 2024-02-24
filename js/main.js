@@ -1,7 +1,8 @@
-const activity			= document.querySelector    ( 'select[name="activity"]'	);
-const calculatorForm	= document.getElementById	( 'calculator-form'			);
-const idType			= document.getElementById	( 'id'						);
-const result			= document.getElementById	( 'result'					);
+const activity			= document.querySelector    		( 'select[name="activity"]'	);
+const calculatorForm	= document.getElementById			( 'calculator-form'			);
+const idType			= document.getElementById			( 'id'						);
+const result			= document.getElementById			( 'result'					);
+const customselects 	= document.getElementsByClassName	("custom-select"			);
 
 activity.addEventListener(
 	'click',
@@ -290,3 +291,88 @@ function toggleTheme(){
         ? 'Modo Claro'
         : 'Modo Oscuro';
 }
+
+//Select logic
+
+for( let i = 0; i < customselects.length; i ++ ){
+	const selectElement 	= customselects[ i ].getElementsByTagName( "select")[ 0 ];
+	const selectSelected	= document.createElement( "DIV" );
+	const selectHide		= document.createElement( "DIV" );
+
+	selectSelected.className = "select-selected";
+	selectSelected.innerHTML = selectElement.options[ selectElement.selectedIndex ].innerHTML;
+
+	selectHide.className = "select-items select-hide";
+
+	customselects[ i ].appendChild( selectSelected );
+
+	for( let j = 1; j < selectElement.length; j ++ ){
+		const option = document.createElement( "DIV" );
+
+		option.innerHTML = selectElement.options[ j ].innerHTML;
+
+		option.addEventListener(
+			"click",
+			function( element ){
+				const select 			= this.parentNode.parentNode.getElementsByTagName( "select" )[ 0 ];
+				const previousSibling 	= this.parentNode.previousSibling;
+
+				for( let i = 0; i < select.length; i ++ ){
+					if( select.options[ i ].innerHTML == this.innerHTML ){
+						const sameAsSelect = this.parentNode.getElementsByClassName( "same-as-selected" );
+
+						select			.selectedIndex 	= i;
+						previousSibling	.innerHTML 		= this.innerHTML;
+
+						for( let k = 0; k < sameAsSelect.length; k++ ){
+							sameAsSelect[ k ].removeAttribute( "class" );
+						}
+
+						this.className = "same-as-selected";
+
+						break;
+					}
+				}
+
+				h.click();
+			}
+		);
+
+		selectHide.appendChild( option );
+	}
+
+  	customselects[ i ].appendChild( selectHide );
+
+	selectSelected.addEventListener(
+		"click",
+		function( element ){
+			element.stopPropagation();
+			closeAllSelect( this );
+
+			this.nextSibling.classList	.toggle( "select-hide" 			);
+			this.classList				.toggle( "select-arrow-active" 	);
+		}
+	);
+}
+
+function closeAllSelect( elment ){
+	const 	selectItems 	= document.getElementsByClassName( "select-items" 		);
+  	const 	selectSelected 	= document.getElementsByClassName( "select-selected" 	);
+  	var 	itemsToHide		= [];
+  
+	for( let i = 0; i < selectSelected.length; i ++ ){
+		if( elment == selectSelected[ i ] ){
+			itemsToHide.push( i );
+		}else{
+			selectSelected[ i ].classList.remove( "select-arrow-active" );
+		}
+	}
+
+	for( let i = 0; i < selectItems.length; i ++ ){
+		if( itemsToHide.indexOf( i ) ){
+			selectItems[ i ].classList.add( "select-hide" );
+		}
+	}
+}
+
+document.addEventListener( "click", closeAllSelect );
