@@ -12,6 +12,8 @@
     --background-color  : #2F2B23ff;
     --text-color        : rgb(151, 201, 254);
     --error-text-color  : #FF0000FF;
+    --interesant-color  : #c51a1a2e; /* This is a color that I found interesant */
+    --semi-transparent  : rgba(255, 255, 255, 0.3);
 }
 
 .dark-theme {
@@ -340,324 +342,325 @@ body::-webkit-scrollbar-thumb {
 
 /* Common styles for all input types */
 input, input[type="text"], input[type="number"] {
-    color-scheme    : light dark;
-    padding         : 10px;
-    margin          : 0px 0;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    background-color: transparent;
-    color           : var(--text-color);
-    transition      : 0.3s;
+  color-scheme: light dark;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Submit button styles */
 input[type="submit"] {
-    background-color: var(--accent-color);
-    cursor          : pointer;
-    transition      : 0.3s;
+  background-color: var(--accent-color);
+  cursor: pointer;
 }
 
 input[type="submit"]:hover,
 input[type="submit"]:active,
 input[type="submit"]:focus {
-    background-color: var(--accent-color);
-    transition      : 0.3s;
+  background-color: var(--accent-color);
 }
 
+/* Text and number input styles */
 input[type="text"],
 input[type="number"] {
-    color			: var(--text-color) !important;
-    background-color: #ffffff2e;
-    transition      : 0.3s;
+  background-color: var(--semi-transparent);
 }
 
 /* Placeholder color */
-input[type="text"]::placeholder, input[type="number"]::placeholder{
-    color: var(--text-color);
-    transition      : 0.3s;
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: var(--text-color);
 }
 
 /* Focus styles */
 input[type="text"]:focus,
 input[type="number"]:focus {
-    background-color: #ffffff2e;
-    transition      : 0.3s;
+  background-color: var(--semi-transparent);
+  color: var(--text-color);
 }
 
+/* Radio button styles */
 input[type="radio"] {
-    border         : 2px solid var(--secondary-color);
-    border-radius  : 50%;
-    width          : 1rem;
-    height         : 1rem;
-    background-color: transparent;
-    cursor         : pointer;
-    transition      : 0.3s;
+  border: 2px solid var(--secondary-color);
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
 input[type="radio"]:checked {
-    border: 2px solid var(--accent-color);
-    background-color: var(--accent-color);
-    transition      : 0.3s;
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
 }
 
 input[type="radio"]:hover {
-    border: 2px solid var(--secondary-color);
-    background-color: var(--secondary-color);
-    transition      : 0.3s;
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 }
 
 input[type="radio"]:active {
-    border: 2px solid var(--accent-color);
-    background-color: var(--accent-color);
-    transition      : 0.3s;
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
 }
 
 input[type="radio"]:focus {
-    border: 2px solid var(--accent-color);
-    background-color: var(--accent-color);
-    transition      : 0.3s;
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
 }
 
+/* Radio button inner circle */
 input[type="radio"]::before {
-    content: "";
-    display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background-color: var(--text-color);
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: 0.3s;
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-input[type="radio"]:checked::before {
-    opacity: 1;
-}
-
-input[type="radio"]:hover::before {
-    opacity: 1;
-}
-
-input[type="radio"]:active::before {
-    opacity: 1;
-}
-
+input[type="radio"]:checked::before,
+input[type="radio"]:hover::before,
+input[type="radio"]:active::before,
 input[type="radio"]:focus::before {
-    opacity: 1;
+  opacity: 1;
 }
 
+
+/* Base styles for custom select */
 .custom-select {
-	position	: relative;
-	font-family	: Arial;
-}
-
-.custom-select select {
-	display	: none; /*hide original SELECT element: */
-}
+    position: relative;
+    font-family: Arial;
+  }
   
-.select-selected {
-	background-color: #ffffff2e;
-}
+  .custom-select select {
+    display: none; /* hide original SELECT element */
+  }
+  
+  /* Selected item style */
+  .select-selected {
+    background-color: var(--semi-transparent);
+    backdrop-filter: blur(5px); /* backdrop filter for blur effect */
+    -webkit-backdrop-filter: blur(5px); /* fallback for Safari */
+    opacity: 0.9; /* reduce opacity for better readability */
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Arrow icon */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: calc(50% - 3px);
+    right: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+  }
+  
+  /* Active state of the select box */
+  .select-selected.select-arrow-active:after {
+    transform: rotate(-135deg);
+  }
+  
+  /* Styles for options */
+  .select-items div,
+  .select-selected {
+    color: var(--text-color);
+  }
+  
+  /* Option item style */
+  .select-items div {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Container for options */
+  .select-items {
+    position: absolute;
+    background-color:  var(--background-color);
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    z-index: 99;
+    backdrop-filter: blur(5px); /* backdrop filter for blur effect */
+    -webkit-backdrop-filter: blur(5px); /* fallback for Safari */
+    opacity: 0.9; /* reduce opacity for better readability */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  /* Hide the options when the select box is closed */
+  .select-hide {
+    display: none;
+  }
+  
+  /* Hover style for options */
+  .select-items div:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
 
-/* Style the arrow inside the select element: */
-.select-selected:after {
-	position: absolute;
-	content: "";
-	top: 14px;
-	right: 10px;
-	width: 0;
-	height: 0;
-	border: 6px solid transparent;
-	border-color: #fff transparent transparent transparent;
-	border-radius: 50%;
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-	border-color: transparent transparent #fff transparent;
-	top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-	color			: var( --text-color );
-	padding			: 8px 16px;
-	border			: 1px solid transparent;
-	border-color	: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-	border-radius	: 5%;
-	cursor			: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-	position		: absolute;
-	background-color: #0000008e;
-	top				: 100%;
-	left			: 0;
-	right			: 0;
-	z-index			: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-	display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-	background-color: #ffffff2e;
-}
-
-.title {
-    padding         : 5px;
-    margin          : auto;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    color           : rgba(255, 255, 255, 0.541);
-    transition		: 0.3s;
+/* Common styles for .title and .form-label */
+.title,
+.form-label {
+  padding: 5px;
+  margin: auto;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.541);
+  transition: color 0.3s;
 }
 
 .form-label {
-    padding         : 5px;
-    margin          : auto;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    color           : rgba(255, 255, 255, 0.541);
-    font-size       : 1.2rem;
-    transition		: 0.3s;
+    font-size: 1.2rem;
 }
 
-.form-label:hover, .title:hover {
-    color           : var(--text-color);
-    transition		: 0.3s;
+/* Hover effect for .title and .form-label */
+.title:hover,
+.form-label:hover {
+  color: var(--text-color);
 }
 
+/* Common styles for .form-check-input */
 .form-check-input {
-    padding         : 10px;
-    margin          : 0px 0;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    background-color: #ffffff2e;
-    color           : var(--text-color);
-    animation		: 0.3s;
-    transition		: 0.3s;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--semi-transparent);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.form-check-input:focus {
-    background-color: #ffffff2e;
-    color           : var(--text-color);
-    transition: 0.3s;
-}
-
-.form-check-input::placeholder {
-    background-color: #ffffff2e;
-    color           : var(--text-color);
-    transition: 0.3s;
-}
-
+/* Focus styles for .form-check-input */
+.form-check-input:focus,
 .form-check-input:focus-within {
-    background-color: #ffffff2e;
-    color           : var(--text-color);
-    transition: 0.3s;
+  background-color: var(--semi-transparent);
+  color: var(--text-color);
 }
 
+/* Placeholder style for .form-check-input */
+.form-check-input::placeholder {
+  color: var(--text-color);
+}
+
+/* Checked state styles for .form-check-input */
 .form-check-input:checked {
-    background-color: var(--accent-color);
-    color           : var(--text-color);
-    animation: 0.3s;
-    transition: 0.3s;
+  background-color: var(--accent-color);
 }
 
+/* Checked state placeholder style for .form-check-input */
 .form-check-input:checked::placeholder {
-    background-color: var(--accent-color);
-    color           : var(--text-color);
-    transition: 0.3s;
+  color: var(--text-color);
 }
 
+/* Checked state focus styles for .form-check-input */
 .form-check-input:checked:focus-within {
-    background-color: var(--accent-color);
-    color           : var(--text-color);
-    transition: 0.3s;
+  background-color: var(--accent-color);
 }
 
+/* Hover effect for .form-check-input */
 .form-check-input:hover {
-    background-blend-mode: overlay;
-    background-color: #ffffff2e;
-    color           : var(--text-color);
-    transition: 0.3s;
+  background-color: var(--semi-transparent);
 }
 
-
-
+/* Styling for form legend */
 form legend {
-    padding         : auto;
-    margin          : auto;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    color           : rgba(255, 255, 255, 0.541);
+  padding: auto;
+  margin: auto;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.541);
 }
 
+/* Common styles for elements under #id */
 #id * {
-    padding         : 10px;
-    margin          : 10px 0;
-    width           : 100%;
-    border          : none;
-    border-radius   : 5px;
-    background-color: #ffffff2e;
-    color           : var(--text-color);
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--semi-transparent);
+  color: var(--text-color);
 }
 
+/* Theme switch styles */
 .theme-switch {
-    width           : 60px;
-    height          : 30px;
-    position        : relative;
-    display         : block;
-    background      : #ebebeb;
-    border-radius   : 200px;
-    box-shadow      : inset 0px 5px 15px rgba(0,0,0,0.4), inset 0px -5px 15px rgba(255,255,255,0.4);
-    cursor          : pointer;
+  width: 60px;
+  height: 30px;
+  position: relative;
+  display: block;
+  background: #ebebeb;
+  border-radius: 200px;
+  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
 }
 
+
+/* Button Styles */
 .btn-danger {
     background-color: var(--accent-color);
-    color           : var(--text-color);
-    cursor          : pointer;     
-}
-
-.btn-danger:hover {
+    color: var(--text-color);
+    cursor: pointer;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s; /* Added transition */
+  }
+  
+  .btn-danger:hover,
+  .btn-danger:active,
+  .btn-danger:focus {
     background-color: var(--secondary-color);
-    color           : var(--text-color);
-}
-
-.btn-danger:active {
-    background-color: var(--secondary-color);
-    color           : var(--text-color);
-}
-
-.btn-danger:focus {
-    background-color: var(--secondary-color);
-    color           : var(--text-color);
-}
-
-.form-control{
-	color: var( --text-color );
-}
-
-.input-no-content::placeholder{
-	color: var( --error-text-color ) !important;
-}
-
-.value-span{
-	font-weight: bold;
-}
-
-.language-switch {
+  }
+  
+  /* Form Control Styles */
+  .form-control {
+    color: var(--text-color);
+    border: 1px solid var(--border-color); /* Added border */
+    border-radius: 4px;
+    padding: 8px;
+    transition: border-color 0.3s; /* Added transition */
+  }
+  
+  .form-control:focus {
+    border-color: var(--accent-color);
+  }
+  
+  /* Placeholder Styles */
+  .input-no-content::placeholder {
+    color: var(--error-text-color);
+  }
+  
+  /* Additional Styles */
+  .value-span {
+    font-weight: bold;
+  }
+  
+  /* Language Switch Styles */
+  .language-switch {
     position: static;
     display: flex;
     flex-direction: row;
@@ -665,11 +668,25 @@ form legend {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    transition: 0.3s;
+    transition: transform 0.3s, opacity 0.3s; /* Added transition */
     z-index: 100;
+  }
+  
+
+  @keyframes showResultAnimation {
+    from {
+        opacity: 0;
+        -webkit-backdrop-filter: blur(0px);
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
 }
 
-@keyframes showResultAnimation {
+@-webkit-keyframes showResultAnimation {
     from {
         opacity: 0;
         -webkit-backdrop-filter: blur(0px);
@@ -683,6 +700,19 @@ form legend {
 }
 
 @keyframes vanishResultAnimation {
+    from {
+        opacity: 1;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
+    to {
+        opacity: 0;
+        -webkit-backdrop-filter: blur(0px);
+        backdrop-filter: blur(0px);
+    }
+}
+
+@-webkit-keyframes vanishResultAnimation {
     from {
         opacity: 1;
         -webkit-backdrop-filter: blur(5px);
