@@ -79,11 +79,14 @@ function calcularCalorias(){
         showErrorMessage( 'Calc error.' );
 
         return;
+    } else {
+        calories = Math.round( calories );
     }
+    
 
 	result.innerHTML = `
-		<div class="card-body d-flex flex-column justify-content-center align-items-center h-100" id="calc">
-			<div class="card my-3" style="width: 30rem;">
+		<div class="card-body d-flex flex-column justify-content-center align-items-center h-auto">
+			<div class="card my-3" style="width: 30rem;" id="calc">
 			    <h2 class="card-title h2 text-center mb-4" style="font-size: 3rem;">Result</h2>
 				<p 
 					class	="text-center card-text p-3"
@@ -239,8 +242,6 @@ function showErrorMessage( msg ){
 
     setTimeout(
         () => {
-            divError.remove();
-
             vanishResult();
         },
         5000
@@ -333,8 +334,20 @@ for( let i = 0; i < customselects.length; i ++ ){
 						break;
 					}
 				}
+                
+                previousSibling.click(); // Close the dropdown list
 
-				h.click();
+                element.stopPropagation(); // Prevents the document click event from being triggered
+
+                closeAllSelect( this ); // Close all select boxes in the document, except the current one
+
+                select.style.color = getComputedStyle( select ).getPropertyValue( '--text-color' ); // Change the color of the selected item
+
+                previousSibling.style.color = getComputedStyle( previousSibling ).getPropertyValue( '--text-color' ); // Change the color of the selected item
+
+                previousSibling.style.color = getComputedStyle( previousSibling ).getPropertyValue( '--text-color' ); // Change the color of the selected item
+
+                select.style.color = getComputedStyle( select ).getPropertyValue( '--text-color' ); // Change the color of the selected item
 			}
 		);
 
